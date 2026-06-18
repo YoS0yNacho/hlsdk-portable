@@ -6,7 +6,6 @@
 *.a
 *.framework
 *.exe
-*.dll
 *.pdb
 build/
 CMakeLists.txt.*
