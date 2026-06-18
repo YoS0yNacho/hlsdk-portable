@@ -71,6 +71,10 @@ cvar_t	*cam_idealpitch;
 cvar_t	*cam_idealdist;
 cvar_t	*cam_contain;
 
+cvar_t	*cam_xoffset;
+cvar_t	*cam_yoffset;
+cvar_t	*cam_zoffset;
+
 cvar_t	*c_maxpitch;
 cvar_t	*c_minpitch;
 cvar_t	*c_maxyaw;
@@ -78,8 +82,8 @@ cvar_t	*c_minyaw;
 cvar_t	*c_maxdistance;
 cvar_t	*c_mindistance;
 
-// pitch, yaw, dist
-vec3_t cam_ofs;
+// pitch, yaw, dist, x, y, z
+float cam_ofs[6];
 
 // In third person
 int cam_thirdperson;
@@ -169,8 +173,7 @@ void DLLEXPORT CAM_Think( void )
 #endif
 	vec3_t viewangles;
 
-	if( gEngfuncs.GetMaxClients() > 1 && CL_IsThirdPerson() )
-		CAM_ToFirstPerson();
+	// No automatic forcing of first-person; allow player to choose freely
 
 	switch( (int)cam_command->value )
 	{
@@ -410,6 +413,9 @@ void DLLEXPORT CAM_Think( void )
 	cam_ofs[0] = camAngles[0];
 	cam_ofs[1] = camAngles[1];
 	cam_ofs[2] = dist;
+	cam_ofs[3] = cam_xoffset->value;
+	cam_ofs[4] = cam_yoffset->value;
+	cam_ofs[5] = cam_zoffset->value;
 }
 
 extern void KeyDown( kbutton_t *b );	// HACK
@@ -478,13 +484,6 @@ void CAM_OutUp( void )
 void CAM_ToThirdPerson( void )
 {
 	vec3_t viewangles;
-#if !_DEBUG
-	if( gEngfuncs.GetMaxClients() > 1 )
-	{
-		// no thirdperson in multiplayer.
-		return;
-	}
-#endif
 	gEngfuncs.GetViewAngles( (float *)viewangles );
 
 	if( !cam_thirdperson )
@@ -533,12 +532,15 @@ void CAM_Init( void )
 	gEngfuncs.pfnAddCommand( "-camdistance", CAM_EndDistance );
 	gEngfuncs.pfnAddCommand( "snapto", CAM_ToggleSnapto );
 
-	cam_command			= gEngfuncs.pfnRegisterVariable( "cam_command", "0", 0 );	 // tells camera to go to thirdperson
+	cam_command			= gEngfuncs.pfnRegisterVariable( "cam_command", "1", 0 );	 // tells camera to go to thirdperson (default enabled)
 	cam_snapto			= gEngfuncs.pfnRegisterVariable( "cam_snapto", "0", 0 );	 // snap to thirdperson view
 	cam_idealyaw			= gEngfuncs.pfnRegisterVariable( "cam_idealyaw", "0", 0 );	 // thirdperson yaw
 	cam_idealpitch			= gEngfuncs.pfnRegisterVariable( "cam_idealpitch", "0", 0 );	 // thirperson pitch
 	cam_idealdist			= gEngfuncs.pfnRegisterVariable( "cam_idealdist", "128", 0 );	 // thirdperson distance
 	cam_contain			= gEngfuncs.pfnRegisterVariable( "cam_contain", "0", 0 );	// contain camera to world
+	cam_xoffset			= gEngfuncs.pfnRegisterVariable( "cam_xoffset", "0", 0 );
+	cam_yoffset			= gEngfuncs.pfnRegisterVariable( "cam_yoffset", "0", 0 );
+	cam_zoffset			= gEngfuncs.pfnRegisterVariable( "cam_zoffset", "0", 0 );
 
 	c_maxpitch			= gEngfuncs.pfnRegisterVariable( "c_maxpitch", "90.0", 0 );
 	c_minpitch			= gEngfuncs.pfnRegisterVariable( "c_minpitch", "0.0", 0 );
@@ -561,15 +563,18 @@ void CAM_ClearStates( void )
 	cam_in.state = 0;
 	cam_out.state = 0;
 
-	cam_thirdperson = 0;
-	cam_command->value = 0;
-	cam_mousemove=0;
+	// Enable third-person by default
+	cam_thirdperson = 1;
+	if( cam_command )
+		cam_command->value = 1;
+	cam_mousemove = 0;
 
 	cam_snapto->value = 0;
 	cam_distancemove = 0;
 
-	cam_ofs[0] = 0.0;
-	cam_ofs[1] = 0.0;
+	// Initialize camera offset to current view angles and default distance
+	cam_ofs[0] = viewangles[PITCH];
+	cam_ofs[1] = viewangles[YAW];
 	cam_ofs[2] = CAM_MIN_DIST;
 
 	cam_idealpitch->value = viewangles[PITCH];
@@ -666,5 +671,10 @@ int DLLEXPORT CL_IsThirdPerson( void )
 
 void DLLEXPORT CL_CameraOffset( float *ofs )
 {
-	VectorCopy( cam_ofs, ofs );
+	ofs[0] = cam_ofs[0];
+	ofs[1] = cam_ofs[1];
+	ofs[2] = cam_ofs[2];
+	ofs[3] = cam_ofs[3];
+	ofs[4] = cam_ofs[4];
+	ofs[5] = cam_ofs[5];
 }

@@ -554,18 +554,28 @@ void V_CalcNormalRefdef( struct ref_params_s *pparams )
 	{
 		vec3_t ofs;
 
-		ofs[0] = ofs[1] = ofs[2] = 0.0f;
+		// CL_CameraOffset now fills 6 floats
+		float cam_data[6];
+		CL_CameraOffset( cam_data );
 
-		CL_CameraOffset( (float *)&ofs );
+		camAngles[0] = cam_data[0];
+		camAngles[1] = cam_data[1];
+		camAngles[2] = 0; // Roll is usually 0 for camera
 
-		VectorCopy( ofs, camAngles );
-		camAngles[ROLL]	= 0;
-
+		float dist = cam_data[2];
+		
+		// Apply x, y, z offsets to vieworg
 		AngleVectors( camAngles, camForward, camRight, camUp );
 
 		for( i = 0; i < 3; i++ )
 		{
-			pparams->vieworg[i] += -ofs[2] * camForward[i];
+			pparams->vieworg[i] += cam_data[3] * camForward[i] + cam_data[4] * camRight[i] + cam_data[5] * camUp[i];
+		}
+
+		// Apply distance
+		for( i = 0; i < 3; i++ )
+		{
+			pparams->vieworg[i] += -dist * camForward[i];
 		}
 	}
 

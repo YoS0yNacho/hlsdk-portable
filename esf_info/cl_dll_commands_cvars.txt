@@ -1,0 +1,196 @@
+Console Commands and CVars Analysis
+====================================
+
+List of commands and cvars found in the binary compared to the cl_dll source project.
+
+--------------------------------------------------
+CONSOLE COMMANDS (+pfnAddCommand)
+--------------------------------------------------
+
+Status  | Name                  | Binary Func | Source Location (if present)
+------- | --------------------- | ----------- | ---------------------------
+PRESENT | +moveup               | 10029c80    | cl_dll/input.cpp
+PRESENT | -moveup               | 10029c90    | cl_dll/input.cpp
+PRESENT | +movedown             | 10029ca0    | cl_dll/input.cpp
+PRESENT | -movedown             | 10029cb0    | cl_dll/input.cpp
+PRESENT | +left                 | 10029cc0    | cl_dll/input.cpp
+PRESENT | -left                 | 10029cd0    | cl_dll/input.cpp
+PRESENT | +right                | 10029ce0    | cl_dll/input.cpp
+PRESENT | -right                | 10029cf0    | cl_dll/input.cpp
+PRESENT | +forward              | 10029d00    | cl_dll/input.cpp
+PRESENT | -forward              | 10029d20    | cl_dll/input.cpp
+PRESENT | +back                 | 10029d40    | cl_dll/input.cpp
+PRESENT | -back                 | 10029d60    | cl_dll/input.cpp
+PRESENT | +lookup               | 10029d80    | cl_dll/input.cpp
+PRESENT | -lookup               | 10029d90    | cl_dll/input.cpp
+PRESENT | +lookdown             | 10029da0    | cl_dll/input.cpp
+PRESENT | -lookdown             | 10029db0    | cl_dll/input.cpp
+PRESENT | +strafe               | 10029e60    | cl_dll/input.cpp
+PRESENT | -strafe               | 10029e70    | cl_dll/input.cpp
+PRESENT | +moveleft             | 10029dc0    | cl_dll/input.cpp
+PRESENT | -moveleft             | 10029de0    | cl_dll/input.cpp
+PRESENT | +moveright            | 10029e00    | cl_dll/input.cpp
+PRESENT | -moveright            | 10029e20    | cl_dll/input.cpp
+PRESENT | +speed                | 10029e40    | cl_dll/input.cpp
+PRESENT | -speed                | 10029e50    | cl_dll/input.cpp
+PRESENT | +attack               | 10029fa0    | cl_dll/input.cpp
+PRESENT | -attack               | 10029fc0    | cl_dll/input.cpp
+PRESENT | +attack2              | 10029e80    | cl_dll/input.cpp
+PRESENT | -attack2              | 10029ea0    | cl_dll/input.cpp
+PRESENT | +use                  | 10029eb0    | cl_dll/input.cpp
+PRESENT | -use                  | 10029ed0    | cl_dll/input.cpp
+PRESENT | +jump                 | 10029ee0    | cl_dll/input.cpp
+PRESENT | -jump                 | 10029f00    | cl_dll/input.cpp
+PRESENT | impulse               | 10029fe0    | cl_dll/input.cpp
+PRESENT | +klook                | 10029c30    | cl_dll/input.cpp
+PRESENT | -klook                | 10029c40    | cl_dll/input.cpp
+PRESENT | +mlook                | 10029c70    | cl_dll/input.cpp
+PRESENT | -mlook                | 1002a040    | cl_dll/input.cpp
+PRESENT | +jlook                | 10029c50    | cl_dll/input.cpp
+PRESENT | -jlook                | 10029c60    | cl_dll/input.cpp
+PRESENT | +duck                 | 10029f10    | cl_dll/input.cpp
+PRESENT | -duck                 | 10029f30    | cl_dll/input.cpp
+PRESENT | +reload               | 10029f40    | cl_dll/input.cpp
+PRESENT | -reload               | 10029f50    | cl_dll/input.cpp
+PRESENT | +alt1                 | 10029f60    | cl_dll/input.cpp
+PRESENT | -alt1                 | 10029f70    | cl_dll/input.cpp
+PRESENT | +score                | 1002a000    | cl_dll/input.cpp
+PRESENT | -score                | 1002a020    | cl_dll/input.cpp
+PRESENT | +showscores           | 1002a000    | cl_dll/input.cpp
+PRESENT | -showscores           | 1002a020    | cl_dll/input.cpp
+PRESENT | +graph                | 10029f80    | cl_dll/input.cpp
+PRESENT | -graph                | 10029f90    | cl_dll/input.cpp
+PRESENT | +break                | 10029c10    | cl_dll/input.cpp
+PRESENT | -break                | 10029c20    | cl_dll/input.cpp
+PRESENT | force_centerview      | 1002adb0    | cl_dll/input_goldsource.cpp
+PRESENT | joyadvancedupdate     | 1002b230    | cl_dll/input_goldsource.cpp
+PRESENT | centerview            | 1004ff60    | cl_dll/view.cpp (as cmd)
+PRESENT | +campitchup           | 100285f0    | cl_dll/in_camera.cpp
+PRESENT | -campitchup           | 10028600    | cl_dll/in_camera.cpp
+PRESENT | +campitchdown         | 10028610    | cl_dll/in_camera.cpp
+PRESENT | -campitchdown         | 10028620    | cl_dll/in_camera.cpp
+PRESENT | +camyawleft           | 10028630    | cl_dll/in_camera.cpp
+PRESENT | -camyawleft           | 10028640    | cl_dll/in_camera.cpp
+PRESENT | +camyawright          | 10028650    | cl_dll/in_camera.cpp
+PRESENT | -camyawright          | 10028660    | cl_dll/in_camera.cpp
+PRESENT | +camin                | 10028670    | cl_dll/in_camera.cpp
+PRESENT | -camin                | 10028680    | cl_dll/in_camera.cpp
+PRESENT | +camout               | 10028690    | cl_dll/in_camera.cpp
+PRESENT | -camout               | 100286a0    | cl_dll/in_camera.cpp
+PRESENT | thirdperson           | 100286b0    | cl_dll/in_camera.cpp
+PRESENT | firstperson           | 10028710    | cl_dll/in_camera.cpp
+PRESENT | +cammousemove         | 10028770    | cl_dll/in_camera.cpp
+PRESENT | -cammousemove         | 10028800    | cl_dll/in_camera.cpp
+PRESENT | +camdistance          | 10028810    | cl_dll/in_camera.cpp
+PRESENT | -camdistance          | 10028890    | cl_dll/in_camera.cpp
+PRESENT | snapto                | 10028740    | cl_dll/in_camera.cpp
+PRESENT | +commandmenu          | 10022b70    | cl_dll/hud.cpp
+PRESENT | -commandmenu          | 10022bb0    | cl_dll/hud.cpp
+PRESENT | ForceCloseCommandMenu | 10022bc0    | cl_dll/hud.cpp
+PRESENT | special               | 10022ba0    | cl_dll/hud.cpp
+PRESENT | togglebrowser         | 10022bd0    | (present in binary FUN_10023600)
+PRESENT | mp3player             | 10022b90    | (present in binary FUN_10023600)
+PRESENT | spec_mode             | 100526e0?   | cl_dll/hud_spectator.cpp
+PRESENT | spec_decal            | -           | cl_dll/hud_spectator.cpp
+PRESENT | spec_help             | -           | cl_dll/hud_spectator.cpp
+PRESENT | spec_menu             | -           | cl_dll/hud_spectator.cpp
+PRESENT | togglescores          | -           | cl_dll/hud_spectator.cpp
+
+--------------------------------------------------
+CONSOLE VARIABLES (+pfnRegisterVariable)
+--------------------------------------------------
+
+Status  | Name                  | Default Val | Source Location (if present)
+------- | --------------------- | ----------- | ---------------------------
+PRESENT | lookstrafe            | 0           | cl_dll/input.cpp
+PRESENT | lookspring            | 0           | cl_dll/input.cpp
+PRESENT | cl_anglespeedkey      | 0.67        | cl_dll/input.cpp
+PRESENT | cl_yawspeed           | 210         | cl_dll/input.cpp
+PRESENT | cl_pitchspeed         | 225         | cl_dll/input.cpp
+PRESENT | cl_upspeed            | 320         | cl_dll/input.cpp
+PRESENT | cl_forwardspeed       | 400         | cl_dll/input.cpp
+PRESENT | cl_backspeed          | 400         | cl_dll/input.cpp
+PRESENT | cl_sidespeed          | 400         | cl_dll/input.cpp
+PRESENT | cl_movespeedkey       | 0.3         | cl_dll/input.cpp
+PRESENT | cl_pitchup            | 89          | cl_dll/input.cpp
+PRESENT | cl_pitchdown          | 89          | cl_dll/input.cpp
+MISSING | cl_beamquality        | 1           | (Only in binary FUN_1002a430)
+MISSING | cl_mp3player          | 0           | (Only in binary FUN_1002a430)
+MISSING | cl_hightexture        | 0           | (Only in binary FUN_1002a430)
+MISSING | cl_explosionsmoke     | 1           | (Only in binary FUN_1002a430)
+MISSING | cl_fxquality          | 1           | (Only in binary FUN_1002a430)
+MISSING | cl_3drocks            | 0           | (Only in binary FUN_1002a430)
+MISSING | cl_aurabend           | 1           | (Only in binary FUN_1002a430)
+MISSING | cl_interpolgait       | 1           | (Only in binary FUN_1002a430)
+MISSING | cl_smoothflyinganim   | 1           | (Only in binary FUN_1002a430)
+MISSING | cl_drawdiamonds       | 1           | (Only in binary FUN_1002a430)
+MISSING | cl_motionblur         | 1           | (Only in binary FUN_1002a430)
+PRESENT | cl_vsmoothing         | 0.05        | cl_dll/input.cpp
+PRESENT | m_pitch               | 0.022       | cl_dll/input.cpp
+PRESENT | m_yaw                 | 0.022       | cl_dll/input.cpp
+PRESENT | m_forward             | 1           | cl_dll/input.cpp
+PRESENT | m_side                | 0.8         | cl_dll/input.cpp
+PRESENT | cam_command           | 0           | cl_dll/in_camera.cpp
+PRESENT | cam_snapto            | 0           | cl_dll/in_camera.cpp
+PRESENT | cam_idealyaw          | 0           | cl_dll/in_camera.cpp
+PRESENT | cam_idealpitch        | 0           | cl_dll/in_camera.cpp
+PRESENT | cam_idealdist         | 128         | cl_dll/in_camera.cpp
+PRESENT | cam_contain           | 0           | cl_dll/in_camera.cpp
+PRESENT | cam_xoffset           | 0           | cl_dll/in_camera.cpp
+PRESENT | cam_yoffset           | 0           | cl_dll/in_camera.cpp
+PRESENT | cam_zoffset           | 0           | cl_dll/in_camera.cpp
+PRESENT | c_maxpitch            | 90.0        | cl_dll/in_camera.cpp
+PRESENT | c_minpitch            | 0.0         | cl_dll/in_camera.cpp
+PRESENT | c_maxyaw              | 135.0       | cl_dll/in_camera.cpp
+PRESENT | c_minyaw              | -135.0      | cl_dll/in_camera.cpp
+PRESENT | c_maxdistance         | 200.0       | cl_dll/in_camera.cpp
+PRESENT | c_mindistance         | 30.0        | cl_dll/in_camera.cpp
+PRESENT | m_filter              | 0           | cl_dll/input_goldsource.cpp
+PRESENT | sensitivity           | 3           | cl_dll/input_goldsource.cpp
+PRESENT | joystick              | 0           | cl_dll/input_goldsource.cpp
+PRESENT | joyname               | joystick    | cl_dll/input_goldsource.cpp
+PRESENT | joyadvanced           | 0           | cl_dll/input_goldsource.cpp
+PRESENT | joyadvaxisx           | 0           | cl_dll/input_goldsource.cpp
+PRESENT | joyadvaxisy           | 0           | cl_dll/input_goldsource.cpp
+PRESENT | joyadvaxisz           | 0           | cl_dll/input_goldsource.cpp
+PRESENT | joyadvaxisr           | 0           | cl_dll/input_goldsource.cpp
+PRESENT | joyadvaxisu           | 0           | cl_dll/input_goldsource.cpp
+PRESENT | joyadvaxisv           | 0           | cl_dll/input_goldsource.cpp
+PRESENT | joyforwardthreshold    | 0.15        | cl_dll/input_goldsource.cpp
+PRESENT | joysidethreshold      | 0.15        | cl_dll/input_goldsource.cpp
+PRESENT | joypitchthreshold     | 0.15        | cl_dll/input_goldsource.cpp
+PRESENT | joyyawthreshold       | 0.15        | cl_dll/input_goldsource.cpp
+PRESENT | joyforwardsensitivity | -1.0        | cl_dll/input_goldsource.cpp
+PRESENT | joysidesensitivity    | -1.0        | cl_dll/input_goldsource.cpp
+PRESENT | joypitchsensitivity   | 1.0         | cl_dll/input_goldsource.cpp
+PRESENT | joyyawsensitivity     | -1.0        | cl_dll/input_goldsource.cpp
+PRESENT | joywwhack1            | 0.0         | cl_dll/input_goldsource.cpp
+PRESENT | joywwhack2            | 0.0         | cl_dll/input_goldsource.cpp
+PRESENT | scr_ofsx              | 0           | cl_dll/view.cpp
+PRESENT | scr_ofsy              | 0           | cl_dll/view.cpp
+PRESENT | scr_ofsz              | 0           | cl_dll/view.cpp
+PRESENT | v_centermove          | 0.15        | cl_dll/view.cpp
+PRESENT | v_centerspeed         | 500         | cl_dll/view.cpp
+PRESENT | cl_bobcycle           | 0.8         | cl_dll/view.cpp
+PRESENT | cl_bob                | 0.01        | cl_dll/view.cpp
+PRESENT | cl_bobup              | 0.5         | cl_dll/view.cpp
+PRESENT | cl_waterdist          | 4           | cl_dll/view.cpp
+PRESENT | cl_chasedist          | 112         | cl_dll/view.cpp
+PRESENT | hud_classautokill     | 1           | cl_dll/hud.cpp
+PRESENT | hud_takesshots        | 0           | cl_dll/hud.cpp
+PRESENT | zoom_sensitivity_ratio| 1.2         | cl_dll/hud.cpp
+PRESENT | default_fov           | 90          | cl_dll/hud.cpp
+PRESENT | hud_capturemouse      | 1           | cl_dll/hud.cpp
+PRESENT | hud_draw              | 1           | cl_dll/hud.cpp
+PRESENT | spec_drawnames        | 1           | cl_dll/hud_spectator.cpp
+PRESENT | spec_drawcone         | 1           | cl_dll/hud_spectator.cpp
+PRESENT | spec_drawstatus       | 1           | cl_dll/hud_spectator.cpp
+PRESENT | spec_autodirector     | 1           | cl_dll/hud_spectator.cpp
+PRESENT | spec_pip              | 1           | cl_dll/hud_spectator.cpp
+
+--------------------------------------------------
+SUMMARY
+--------------------------------------------------
+
+Missing commands: 0 (from the ones analyzed in detailed init functions)
+Missing cvars: 11 (mostly visual quality and effect settings like cl_fxquality, cl_motionblur, etc.)

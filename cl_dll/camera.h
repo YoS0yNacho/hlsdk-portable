@@ -11,8 +11,8 @@
 #if !defined(_CAMERA_H_)
 #define _CAMERA_H_
 
-// pitch, yaw, dist
-extern vec3_t cam_ofs;
+// pitch, yaw, dist, x, y, z
+extern float cam_ofs[6];
 // Using third person camera
 extern int cam_thirdperson;
 
